@@ -109,6 +109,42 @@ bardio.cz/
 - **Velikosti:** Upravte CSS proměnné
 - **Layout:** Modifikujte grid systémy
 
+## 📢 **Promo lišta (informační banner)**
+
+Na homepage je umístěna výrazná promo lišta pod horním menu a nad hero sekcí. Slouží k zobrazení důležitých informací (např. vánoční akce, časově omezené nabídky).
+
+### **Umístění:**
+- **HTML:** `index.html` - hned pod `</header>`, před hero sekcí
+- **CSS:** `styles.css` - třídy `.promo-bar` a `.promo-bar-text`
+
+### **Jak skrýt/zobrazit lištu:**
+
+**Skrýt lištu:**
+Přidej třídu `promo-bar-hidden` na `div` s lištou:
+```html
+<div class="promo-bar promo-bar-hidden">
+```
+
+**Zobrazit lištu:**
+Odeber třídu `promo-bar-hidden`:
+```html
+<div class="promo-bar">
+```
+
+**Alternativa (inline style):**
+- Skrýt: `<div class="promo-bar" style="display: none;">`
+- Zobrazit: `<div class="promo-bar">` (bez `style`)
+
+### **Úprava textu:**
+Text lišty uprav v `index.html` uvnitř `<span class="promo-bar-text">`.
+
+### **Úprava vzhledu:**
+Styly lišty najdeš v `styles.css` u třídy `.promo-bar`:
+- Barva pozadí: `background: linear-gradient(90deg, #dc2626, #b91c1c);`
+- Barva textu: `color: #ffffff;`
+- Velikost písma: `font-size: 1rem;`
+- Padding: `padding: 0.7rem 1rem;`
+
 ## 🚀 **Deploy za 5 minut:**
 
 ### **GitHub Pages:**
