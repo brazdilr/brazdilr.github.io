@@ -1,0 +1,23 @@
+{
+  "name": "bardio-local",
+  "version": "1.0.0",
+  "description": "Lokální generátor osobních stránek Bardio.cz (Cloudflare R2 + HTML)",
+  "main": "script.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node script.mjs",
+    "make": "node script.mjs single"
+  },
+  "keywords": [],
+  "author": "Radek Brázdil",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "@aws-sdk/s3-request-presigner": "^3.0.0",
+    "chokidar": "^3.5.3",
+    "dotenv": "^16.3.1"
+  },
+  "optionalDependencies": {
+    "googleapis": "^128.0.0"
+  }
+}

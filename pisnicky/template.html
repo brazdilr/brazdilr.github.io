@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaše písnička na přání - Bardio.cz</title>
+    <meta name="description" content="Vaše osobní píseň na míru je hotová! Poslechněte si ji a stáhněte si ji ve vysoké kvalitě.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --secondary: #10b981;
+            --gray-900: #111827;
+            --gray-800: #1f2937;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --gray-50: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            font-weight: 400;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .bard-animation {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .bard-icon {
+            font-size: 8rem;
+            animation: playMusic 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes playMusic {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(-2deg); }
+            50% { transform: scale(1.1) rotate(0deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+        }
+
+        .player-section {
+            margin-bottom: 2rem;
+        }
+
+        .player-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .audio-player {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            padding: 1.5rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .track-info {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .track-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .track-artist {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .progress-container {
+            flex: 1;
+            margin: 0 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: white;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .download-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+
+        .footer-text {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .footer-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .content-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .bard-icon {
+                font-size: 6rem;
+            }
+
+            .download-section {
+                grid-template-columns: 1fr;
+            }
+
+            .player-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .progress-container {
+                margin: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">Vaše písnička na přání</h1>
+            <p class="subtitle">Vaše osobní píseň je hotová! Poslechněte si ji a užijte si tento jedinečný okamžik.</p>
+        </div>
+
+        <div class="content-card">
+            <div class="bard-animation">
+                <div class="bard-icon">🎵</div>
+            </div>
+
+            <div class="player-section">
+                <h2 class="player-title">Poslechněte si svou píseň</h2>
+                
+                <div class="audio-player">
+                    <div class="track-info">
+                        <div class="track-title" id="trackTitle">Název písně</div>
+                        <div class="track-artist">Vytvořeno pro vás</div>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button class="play-btn" id="playBtn">▶</button>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" id="progress"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="currentTime">0:00</span>
+                                <span id="duration">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="#" class="download-btn" id="downloadMp3">
+                    📥 Stáhnout MP3
+                </a>
+                <a href="#" class="download-btn" id="downloadPdf">
+                    📄 Stáhnout text PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">
+                Vytvořeno s ❤️ pomocí <a href="../index.html" class="footer-link">Bardio.cz</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Audio player functionality
+        class SongPlayer {
+            constructor() {
+                this.audio = new Audio();
+                this.isPlaying = false;
+                this.currentTime = 0;
+                this.duration = 0;
+                
+                this.playBtn = document.getElementById('playBtn');
+                this.progress = document.getElementById('progress');
+                this.currentTimeEl = document.getElementById('currentTime');
+                this.durationEl = document.getElementById('duration');
+                
+                this.init();
+            }
+            
+            init() {
+                // Get audio URL from URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const audioUrl = urlParams.get('audio') || 'songs/Renata.mp3';
+                this.audio.src = audioUrl;
+                
+                // Get song title from URL parameters
+                const songTitle = urlParams.get('title') || 'Vaše píseň na míru';
+                document.getElementById('trackTitle').textContent = songTitle;
+                
+                this.setupEventListeners();
+                this.setupAudioEvents();
+            }
+            
+            setupEventListeners() {
+                this.playBtn.addEventListener('click', () => this.togglePlay());
+                
+                // Progress bar click
+                const progressBar = document.querySelector('.progress-bar');
+                progressBar.addEventListener('click', (e) => {
+                    const rect = progressBar.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const percentage = clickX / rect.width;
+                    this.seekTo(percentage);
+                });
+            }
+            
+            setupAudioEvents() {
+                this.audio.addEventListener('loadedmetadata', () => {
+                    this.duration = this.audio.duration;
+                    this.durationEl.textContent = this.formatTime(this.duration);
+                });
+                
+                this.audio.addEventListener('timeupdate', () => {
+                    this.currentTime = this.audio.currentTime;
+                    this.updateProgress();
+                    this.currentTimeEl.textContent = this.formatTime(this.currentTime);
+                });
+                
+                this.audio.addEventListener('ended', () => {
+                    this.isPlaying = false;
+                    this.playBtn.textContent = '▶';
+                });
+                
+                this.audio.addEventListener('error', (e) => {
+                    console.log('Audio error:', e);
+                    alert('Nepodařilo se načíst audio soubor.');
+                });
+            }
+            
+            togglePlay() {
+                if (this.isPlaying) {
+                    this.pause();
+                } else {
+                    this.play();
+                }
+            }
+            
+            play() {
+                this.audio.play().then(() => {
+                    this.isPlaying = true;
+                    this.playBtn.textContent = '⏸';
+                }).catch(error => {
+                    console.log('Playback failed:', error);
+                    alert('Nepodařilo se přehrát audio.');
+                });
+            }
+            
+            pause() {
+                this.audio.pause();
+                this.isPlaying = false;
+                this.playBtn.textContent = '▶';
+            }
+            
+            seekTo(percentage) {
+                if (this.duration) {
+                    this.audio.currentTime = this.duration * percentage;
+                }
+            }
+            
+            updateProgress() {
+                if (this.duration) {
+                    const percentage = (this.currentTime / this.duration) * 100;
+                    this.progress.style.width = percentage + '%';
+                }
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        // Initialize player when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SongPlayer();
+            
+            // Set up download links
+            const urlParams = new URLSearchParams(window.location.search);
+            const audioUrl = urlParams.get('audio');
+            const pdfUrl = urlParams.get('pdf');
+            
+            if (audioUrl) {
+                document.getElementById('downloadMp3').href = audioUrl;
+            }
+            
+            if (pdfUrl) {
+                document.getElementById('downloadPdf').href = pdfUrl;
+            }
+        });
+    </script>
+</body>
+</html>

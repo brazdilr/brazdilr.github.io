@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osobní písničky na míru | Dárek, který vzniká spojením textaře a technologií | Bardio.cz</title>
+    <meta name="description" content="Překvapte písničkou na míru. Propojíme vás, textaře a technologie a vytvoříme písničku podle vašeho přání. A to i do 24 hodin.">
+ 
+      <!-- CookieBot -->
+    <script id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="3bab6f3c-7492-44ab-8317-044bae98d2bc"
+        data-blockingmode="auto"
+        type="text/javascript"></script>
+
+          <!-- výchozí zamítnutí consentmode -->
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    security_storage: 'granted' // běžná praxe
+  });
+</script>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KQR2WCBM');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Meta Pixel (Cookiebot prior consent) -->
+    <script type="text/plain" data-cookieconsent="marketing">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      
+        fbq('init', '1161795822293404');
+        fbq('track', 'PageView');
+      </script>
+      <!-- End Meta Pixel -->
+    
+     <!-- Měření na 75 % scroll -->
+     <script>
+        document.addEventListener('scroll', function () {
+          try {
+            if (window.Cookiebot?.consent?.marketing && typeof fbq === 'function') {
+              const depth = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+              if (depth >= 0.75 && !window.scrollTracked) {
+                fbq('trackCustom', 'Scrolled75');
+                window.scrollTracked = true;
+              }
+            }
+          } catch(e) { /* nic neodesílej */ }
+        });
+        </script>
+        <!-- Měření na 75 % scroll -->
+
+<!-- Open Graph -->
+    <meta property="og:image" content="https://www.bardio.cz/images/open_graph/og_1_hp.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://www.bardio.cz/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="cs_CZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bardio.cz – Osobní písnička na míru">
+    <meta name="twitter:description" content="Překvapte písničkou, která mluví za vás. Originální dárek vznikne spojení vás, textaře a technologie.">
+    <meta name="twitter:image" content="https://www.bardio.cz/images/open_graph/og_1_hp.jpg">
+    
+    <link rel="canonical" href="https://www.bardio.cz/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="homepage">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQR2WCBM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo logo-wordmark">
+                    <a href="#home" aria-label="Bardio - úvod">
+                        <span class="logo-text">Bardio</span>
+                        <span class="logo-note" aria-hidden="true">♪</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-button" id="mobile-menu-button" type="button" aria-label="Otevřít menu" aria-controls="nav-menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="#samples" class="nav-link">Ukázky písniček</a>
+                    <a href="#how-it-works" class="nav-link">Jak to funguje</a>
+                    <a href="#about" class="nav-link">O mně</a>
+                    <a href="#pricing" class="nav-link">Ceník</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                    <a href="#samples" class="nav-btn">Přehrát ukázky</a>
+                </div>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="promo-bar promo-bar-hidden">
+        <span class="promo-bar-text">
+            Vánoční expres! Všechny objednávky do 23. 12. – 18:00 vám doručíme na Štědrý den.
+        </span>
+    </div>
+
+
+    <!-- Audio Player -->
+    <div class="audio-player" id="audio-player" style="display: none;">
+        <div class="audio-container">
+            <div class="track-info">
+                <div class="track-icon">🎵</div>
+                <div class="track-details">
+                    <div class="track-title">Oslava narozenin</div>
+                    <div class="track-meta">Ukázka písničky • 0:30</div>
+                </div>
+            </div>
+            
+            <div class="audio-controls">
+                <button class="control-btn" id="prev-btn">⏮</button>
+                <button class="control-btn play-btn" id="play-btn">▶</button>
+                <button class="control-btn" id="next-btn">⏭</button>
+                <button class="control-btn" id="mute-btn">🔊</button>
+                <button class="control-btn" id="hide-player">✕</button>
+            </div>
+            
+            <div class="progress-container">
+                <input type="range" class="progress-bar" id="progress-bar" min="0" max="100" value="0">
+                <div class="time-display">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">0:30</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero hero-v2 bardio-hero">
+        <div class="container hero-shell">
+            <div class="hero-grid">
+                <div class="hero-left hero-copy">
+                    <h1 class="hero-title">
+                        <span>Překvapte</span>
+                        <span>osobní písničkou</span>
+                        <span>od textaře</span>
+                    </h1>
+                    <p class="hero-description">
+                        Vy dirigujete, textař ladí, technologie komponuje. Vznikne písnička od srdce, která vydá za tisíc slov.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#samples" class="btn btn-primary">▶ Přehrát ukázky</a>
+                        <a href="#how-it-works" class="btn btn-secondary">Jak to funguje <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="author-note">
+                        <div class="author-avatars" aria-hidden="true">
+                            <span class="author-avatar author-avatar--primary">RB</span>
+                            <span class="author-avatar author-avatar--secondary">T</span>
+                            <span class="author-avatar author-avatar--tertiary">M</span>
+                        </div>
+                        <div class="author-copy">
+                            <p><strong>Radek Brázdil</strong> · textař a průvodce tvorbou</p>
+                            <div class="handwritten">Za každou písničkou je člověk.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-right hero-visual">
+                    <img src="hero-man.png" alt="Člověk u pracovního stolu tvoří osobní písničku s notebookem, textem, sluchátky a ukulele.">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Poutavý přechod s obloukem -->
+    <div class="hero-transition">
+        <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#0fbade"></path>
+        </svg>
+    </div>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="how-it-works how-it-works--turquoise">
+        <div class="container">
+            <h2 class="section-title">Stačí pár slov. Ostatní je na nás</h2>
+            <p class="section-subtitle">Krátké zadání proměníme v osobní písničku. Lidský cit drží příběh, technologie pomáhá s hudbou.</p>
+
+            <div class="features-player-grid">
+                <div class="benefits-column feature-card-list">
+                    <div class="benefit-compact feature-card">
+                        <div class="benefit-icon feature-icon">✒</div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Profi textař po ruce</h3>
+                            <p class="benefit-text">Textař napíše text ručně, nebo pečlivě přetvoří generovaný základ. </p>
+                        </div>
+                    </div>
+                    <div class="benefit-compact feature-card">
+                        <div class="benefit-icon feature-icon">≋</div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">To nejlepší, co s AI dokážeme</h3>
+                            <p class="benefit-text">Používáme licence nástrojů, díky kterým se kvalita blíží studiové nahrávce.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-compact feature-card">
+                        <div class="benefit-icon feature-icon">✓</div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Garance druhé verze</h3>
+                            <p class="benefit-text">Pokud vám písnička nesedne, druhou verzi vytvoříme zdarma.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-compact feature-card">
+                        <div class="benefit-icon feature-icon">◷</div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">Už do 24 hodin posloucháte</h3>
+                            <p class="benefit-text">Brzy, ale ne okamžitě. Ruční část tvorby si žádá svůj čas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="audio-preview-column">
+                    <div class="audio-preview-card">
+                        <div class="preview-menu" aria-hidden="true">•••</div>
+                        <p class="preview-label">Ukázka písničky</p>
+                        <h3>Pro náš velký den</h3>
+                        <p class="preview-origin">Bardio originál</p>
+                        <div class="cover-art" aria-hidden="true">
+                            <span>♡</span>
+                        </div>
+                        <div class="preview-controls" aria-hidden="true">
+                            <span class="preview-play">▶</span>
+                            <div class="preview-wave">
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                            <small>0:00 / 0:45</small>
+                        </div>
+                        <div class="preview-note handwritten">Pusťte si ukázky naživo</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Samostatně přehrávač, o něco širší -->
+            <div id="samples"></div>
+            <h3 class="music-player-title">Poslechněte si ukázky</h3>
+            <div class="music-player-note">Další průběžně připravujeme</div>
+            <div class="music-player" id="music-player">
+                <div class="player-categories">
+                    <div class="category-tabs">
+                        <button class="category-tab active" data-category="pop">Pop</button>
+                        <button class="category-tab" data-category="rock">Rock</button>
+                        <button class="category-tab" data-category="rap">Rap</button>
+                        <button class="category-tab" data-category="dojemne">Dojemné</button>
+                        <button class="category-tab" data-category="detske">Dětské</button>
+                        <button class="category-tab" data-category="dechovka">Dechovka</button>
+                    </div>
+                    
+                    <div class="tracks-list" id="tracks-list">
+                        <!-- Tracks will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- Poutavý přechod s obloukem - ze spodní strany -->
+    <div class="hero-transition hero-transition-bottom">
+        <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
+        </svg>
+    </div>
+
+    <!-- Three steps timeline -->
+    <section id="about" class="steps-timeline">
+        <div class="container steps-grid">
+            <div class="steps-left">
+                <img src="images/bard_dj.png" alt="Bardio - proces tvorby" class="steps-image" />
+            </div>
+            <div class="steps-right">
+                <h2 class="steps-title">Vy dirigujete, my tvoříme</h2>
+                <p class="steps-lead">Neprodáváme anonymní šablonu. Každé zadání čteme, hledáme osobní detail a ladíme slova tak, aby písnička patřila konkrétnímu člověku.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1</div>
+                        <div class="timeline-content">
+                            <h3>Předáte myšlenku, určíte styl</h3>
+                            <p>Popíšete, o čem má písnička být a v jakém stylu. Buď do detailu, nebo nám dáte volné ruce. Máte vlastní text? Sem s ním, rádi ho zhudebníme.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">2</div>
+                        <div class="timeline-content">
+                            <h3>Začneme kouzlit</h3>
+                            <p>Hledáme správná slova. Upravujeme. Skládáme, tvoříme a mixujeme. Člověk a technologie pracují ruku v ruce.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">3</div>
+                        <div class="timeline-content">
+                            <h3>Pošleme hotovou písničku</h3>
+                            <p>Ozveme se hned, jak práci dokončíme. Pošleme e-mail, v případě zájmu i SMS. V e-mailu najdete odkaz na osobní stránku, kde bude písnička ke stažení i přehrávání. Na stažení máte 30 dnů, pak stránku deaktivujeme.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Slyšíte? První tóny se už ozývají</h2>
+            <p class="section-subtitle">Překvapí, rozesmějí, rozpláčou. Od rockera po milovníka dechovky</p>
+            <div class="services-timeline">
+                <div class="timeline-item" data-description="Hledáte dárek, který bude ze srdce? Řekněte své přání písničkou. Narozeniny, výročí, úspěchy - každá oslava si zaslouží svou píseň.">
+                    <div class="timeline-icon"><img src="ikony/oslavy-ikon.svg" alt="Oslavy" /></div>
+                    <span class="timeline-label">Oslavy</span>
+                    <div class="timeline-description">
+                        <p>Hledáte dárek, který bude ze srdce? Řekněte své přání písničkou. Narozeniny, výročí, úspěchy - každá oslava si zaslouží svou píseň.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-description="Hravé melodie a personalizované texty, které si děti zamilují. Veselé písničky pro nejmenší členy rodiny s chytlavými rýmy a zábavnými melodiemi.">
+                    <div class="timeline-icon"><img src="ikony/deti-ikon.svg" alt="Dětské" /></div>
+                    <span class="timeline-label">Dětské</span>
+                    <div class="timeline-description">
+                        <p>Hravé melodie a personalizované texty, které si děti zamilují. Veselé písničky pro nejmenší členy rodiny s chytlavými rýmy a zábavnými melodiemi.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-description="Řekněte svým blízkým, co máte na srdci. Písnička vydá za tisíc slov. Romantické písně pro vašeho partnera nebo milovanou osobu.">
+                    <div class="timeline-icon"><img src="ikony/laska-ikon.svg" alt="Láska" /></div>
+                    <span class="timeline-label">Láska</span>
+                    <div class="timeline-description">
+                        <p>Řekněte svým blízkým, co máte na srdci. Písnička vydá za tisíc slov. Romantické písně pro vašeho partnera nebo milovanou osobu.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-description="Máte vlastní text písně? O hudbu a aranžmá se postaráme my. Zhudebníme vaše slova a vytvoříme nahrávku, která zní jako ze studia.">
+                    <div class="timeline-icon"><img src="ikony/texty-ikon.svg" alt="Texty" /></div>
+                    <span class="timeline-label">Texty</span>
+                    <div class="timeline-description">
+                        <p>Máte vlastní text písně? O hudbu a aranžmá se postaráme my. Zhudebníme vaše slova a vytvoříme nahrávku, která zní jako ze studia.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-description="Výročí, promoce, rozlučky, narození dítěte, oznámení svatby. Je to na vás. Nejkrásnější den vašeho života si zaslouží nejkrásnější píseň.">
+                    <div class="timeline-icon"><img src="ikony/ostatni-ikon.svg" alt="Speciální" /></div>
+                    <span class="timeline-label">Speciální</span>
+                    <div class="timeline-description">
+                        <p>Výročí, promoce, rozlučky, narození dítěte, oznámení svatby. Je to na vás. Jedinečný den života si zaslouží vlastní písničku.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Types -->
+    <section id="pricing" class="service-types">
+        <div class="container">
+            <h2 class="section-title">Vyberte si rozsah služby</h2>
+            <p class="section-subtitle">Dvě varianty, kdy písničku tvoříme za vás. A jedna lehčí cesta, kde si text napíšete s průvodcem sami.</p>
+
+            <div class="service-cards">
+                <div class="service-card service-card--standard service-card--managed">
+                    <div class="service-header">
+                        <div class="service-kicker">Písnička na míru</div>
+                        <h3 class="service-name">STANDARD</h3>
+                        <div class="service-price">590 Kč</div>
+                        <p class="service-summary">Rychlá osobní písnička podle vašeho zadání s textařským dohledem.</p>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-feature">
+                            <p>► 1 písnička podle zadání, délka cca 3 minuty</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► Zběžné korekce (rýmy, nevhodná slova)</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► Dodání do 2 pracovních dnů</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► Pokud písnička nesedne, máte 1 možnost opravy zdarma</p>
+                        </div>
+                    </div>
+                    <div class="service-button">
+                        <a href="#contact" class="btn-primary pick-variant" data-variant="STANDARD">Zvolit variantu</a>
+                    </div>
+                </div>
+
+                <div class="service-card service-card--individual service-card--managed">
+                    <div class="service-header">
+                        <div class="service-kicker">Osobní spolupráce</div>
+                        <h3 class="service-name">INDIVIDUÁL</h3>
+                        <div class="service-price">2390 Kč</div>
+                        <p class="service-summary">Pro chvíle, kdy chcete víc péče, konzultaci a text laděný poctivěji do detailu.</p>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-feature">
+                            <p>► 1 vyladěná písnička s osobní konzultací s textařem</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► Příprava textu ke schválení, následně tvorba hudby s úpravami</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► 1 možnost přepracování textu, 1 možnost přepracování hudby</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► Obvykle do 7 dnů od konzultace</p>
+                        </div>
+                    </div>
+                    <div class="service-button">
+                        <a href="#contact" class="btn-primary pick-variant" data-variant="INDIVIDUÁL">Zvolit variantu</a>
+                    </div>
+                </div>
+
+                <div class="service-card service-card--compose">
+                    <div class="service-header">
+                        <div class="service-kicker">Vyzkoušejte sami</div>
+                        <h3 class="service-name">BARDIO COMPOSE</h3>
+                        <div class="service-price service-price--split"><span>Text zdarma</span><span>Zhudebnění 349 Kč</span></div>
+                        <p class="service-summary">Napište svou písničku s pomocí AI průvodce. Pomůže vám s vytvořením konceptu, který upravíte podle sebe.</p>
+                    </div>
+                    <div class="compose-visual" aria-hidden="true">
+                        <div class="compose-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="compose-wave">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-feature">
+                            <p>► Bardio průvodce a editor ZDARMA</p>
+                        </div>
+                        <div class="service-feature">
+                            <p>► Zhudebnění a mix - 349 Kč</p>
+                        </div>
+                    </div>
+                    <div class="service-button">
+                        <a href="#contact" class="btn-primary pick-variant" data-variant="BARDIO COMPOSE">Vyzkoušet</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviews-carousel">
+                <h3 class="reviews-title">Co říkají ti, kterým už písnička hraje</h3>
+                <div class="reviews-window">
+                    <div class="reviews-track">
+                        <article class="review-card active" data-index="0">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">
+                                „Písnička pro mamku nás všechny rozbrečela. Text přesně vystihl, co jsme chtěli říct, ale neuměli to dát do slov.“
+                            </p>
+                            <div class="review-meta">
+                                <span class="review-author">Lenka, písnička ke Dni matek</span>
+                            </div>
+                        </article>
+                        <article class="review-card" data-index="1">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">
+                                „Měli jsme obavy, jak bude AI hudba působit, ale výsledek byl překvapivě osobní a lidský. Oslavenec si ji pouští doteď.“
+                            </p>
+                            <div class="review-meta">
+                                <span class="review-author">Pavel, narozeninová oslava</span>
+                            </div>
+                        </article>
+                        <article class="review-card" data-index="2">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">
+                                „Potřebovali jsme rychle písničku k videu pro prarodiče. Zadání, konzultace, hotovo – během jednoho dne. Velká úleva.“
+                            </p>
+                            <div class="review-meta">
+                                <span class="review-author">Veronika, rodinné video</span>
+                            </div>
+                        </article>
+                        <article class="review-card" data-index="3">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">
+                                „Textař nám pomohl doladit text, který jsme měli jen v náčrtu. Výsledná verze zněla, jako by nás znal roky.“
+                            </p>
+                            <div class="review-meta">
+                                <span class="review-author">Honza, píseň pro partnerku</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="reviews-controls">
+                    <button class="reviews-arrow reviews-prev" aria-label="Předchozí reference">◀</button>
+                    <div class="reviews-dots" aria-hidden="true">
+                        <button class="reviews-dot active" data-index="0"></button>
+                        <button class="reviews-dot" data-index="1"></button>
+                        <button class="reviews-dot" data-index="2"></button>
+                        <button class="reviews-dot" data-index="3"></button>
+                    </div>
+                    <button class="reviews-arrow reviews-next" aria-label="Další reference">▶</button>
+                </div>
+                <div class="reviews-cta">
+                    <a href="reference.html" class="btn btn-primary">Ukázat další reference</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Co se vám honí hlavou</h2>
+            <p class="section-subtitle">Jednáme fér. Odpovídáme na otázky, které vás zajímají</p>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Víte, že s AI můžu tvořit písně sám a zdarma?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Víme a aktivity dalších tvůrců podporujeme. Chtěli jsme ale hudbu na míru zpřístupnit i těm, kteří nechtějí věnovat dlouhé hodiny zkoušení a experimentování s AI. Přidanou hodnotou je práce textaře, který má cit, dokáže najít vhodná slova i rýmy. Současně používáme PRO licence, které dokážou produkovat texty i hudbu mnohem přesvědčivěji než běžně dostupné aplikace zdarma. </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Za jak dlouho bude písnička hotová?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Skladby negenerujeme na kliknutí, takže příprava textu i hudby zabere čas. Hotové písničky posíláme zpravidla do 24 hodin (podle aktuální vytíženosti textařů a zvolené varianty).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Můžu si vybrat hudební styl?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ano, možnosti jsou prakticky neomezené. Stačí vybrat primární styl a případně žánr  blíže specifikovat. Uvést můžete konkrétní interprery a kapely, které se vám líbí. Pečlivě vyladěné nastavení jednotlivých stylů, aranžmá a nástrojů je součástí našeho know-how. Po stovkách vytvořených písní už víme, co a jak.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Co když mi píseň nebude vyhovovat?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>V případě, že vám první verze nesedne, připravíme druhou zdarma. Podle technických možností buď upravíme stávající, nebo vytvoříme novou verzi. Stačí nám napsat na <a href="mailto:podpora@bardio.cz">podpora@bardio.cz</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Prozradíte, jaké nástroje používáte?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ale jasně, rádi. S texty pracujeme hlavně v ChatGPT, Claude a Gemini. Na produkci pak používáme SUNO.ai a zkoušíme také Beatoven.ai, AIVA, Boomy, ElevenLabs a další. Když je potřeba, vezmeme do ruky kytaru, ukulele, případně určíme melodii pomocí kláves nebo mikrofonu. Na mix nám zatím stačí Garageband.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>V jakém formátu písničky dostanu?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Standardně dodáváme v MP3 (320 kbps). Soubor pošleme přes odkaz na personalizovanou webovou stránku, kde bude ke stažení po dobu 30 dnů. Svou stránku můžete nasdílet i ostatním.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Kdo stojí za projektem Bardio.cz?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>S projektem Bardio přišel Radek Brázdil – copywriter, kreativec a nadšenec do technologií. Nejdřív tvořil písničky jen pro sebe, teď je tu pro vás. Prací s textem se živí 14 let, taky miluje muziku a hraje na hudební nástroje. S tvorbou mu ale pomáhají i další lidé v okolí. A to je důvod, proč k vám mluvíme v množném čísle. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="contact-cta">
+        <div class="container">
+            <h2>Připraveni na svou muziku?</h2>
+            <!-- www.SimpleShop.cz form#114585 start -->
+<div data-SimpleShopForm="XgE9M"><div>Prodejní formulář je vytvořen v systému <a href="https://www.simpleshop.cz/?utm_source=simpleshop&utm_medium=form&utm_campaign=65541" target="_blank">SimpleShop.cz</a>.</div></div>
+<script>
+ (function(i, s, o, g, r, a, m){
+  i[r] = i[r] || function(){
+   (i[r].q = i[r].q || []).push(arguments)
+  }, i[r].l = 1 * new Date();
+  a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0];
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m)
+ })(window, document, "script", "https://form.simpleshop.cz/prj/js/SimpleShopService.js", "sss");
+ sss("createForm", "XgE9M");
+</script>
+<!-- www.SimpleShop.cz form#114585 end -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">🎵 Bardio</div>
+                    <p>Vytváříme osobní písně na míru pro jakoukoliv příležitost. Pomocí technologií a pod dohledem textaře.</p>
+                    <div class="contact-info">
+                        <p>📧 <a href="mailto:podpora@bardio.cz">podpora@bardio.cz</a></p>
+                        <p>📞 +420 732 945 290</p>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="footer-section">
+                    <h4>Stránky</h4>
+                    <ul>
+                        <li><a href="jak-to-funguje.html">Jak to funguje</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Právní informace</h4>
+                    <ul>
+                        <li><a href="obchodni-podminky-bardio.html">Obchodní podmínky</a></li>
+                        <li><a href="zpracovani-osobnich-udaju.html">Zpracování osobních údajů</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <img src="platebni-metody.png" alt="Platební metody" class="payment-methods-img">
+                </div>
+                <p>&copy; 2025 Bardio.cz. Všechna práva vyhrazena.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Audio Button -->
+    <button class="floating-audio-btn" id="floating-audio-btn" style="display: none;">
+        ▶
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
