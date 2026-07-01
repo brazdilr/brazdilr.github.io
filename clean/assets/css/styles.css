@@ -720,6 +720,22 @@ a {
     margin-top: auto;
 }
 
+.coming-soon-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 0.52rem 0.82rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
 .price-card-dark {
     color: var(--white);
     border-top-color: var(--mint);
