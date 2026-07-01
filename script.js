@@ -247,6 +247,8 @@ class AudioPlayer {
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        if (this.matches('[data-video-modal-open]')) return;
+
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -264,9 +266,115 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+function initVideoModal() {
+    const modal = document.getElementById('video-preview');
+    const frame = document.getElementById('video-modal-frame');
+    const title = document.getElementById('video-modal-title');
+    const openButtons = document.querySelectorAll('[data-video-modal-open]');
+    const closeButtons = document.querySelectorAll('[data-video-modal-close]');
+
+    if (!modal || !frame || !openButtons.length) return;
+
+    let lastFocusedElement = null;
+
+    function createVideoNode(src, label) {
+        if (!src) {
+            const empty = document.createElement('p');
+            empty.className = 'video-modal-empty';
+            empty.textContent = 'Video zatím není připojené.';
+            return empty;
+        }
+
+        const isEmbed = /youtube\.com|youtu\.be|vimeo\.com/.test(src);
+        if (isEmbed) {
+            const iframe = document.createElement('iframe');
+            iframe.src = normalizeEmbedUrl(src);
+            iframe.title = label || 'Ukázka Bardio';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            return iframe;
+        }
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.src = src;
+        video.textContent = 'Váš prohlížeč nepodporuje přehrávání videa.';
+        return video;
+    }
+
+    function normalizeEmbedUrl(src) {
+        try {
+            const url = new URL(src, window.location.href);
+            if (url.hostname.includes('youtu.be')) {
+                return `https://www.youtube.com/embed/${url.pathname.replace('/', '')}?autoplay=1`;
+            }
+            if (url.hostname.includes('youtube.com')) {
+                const videoId = url.searchParams.get('v');
+                if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            }
+            if (url.hostname.includes('vimeo.com')) {
+                const id = url.pathname.split('/').filter(Boolean).pop();
+                if (id) return `https://player.vimeo.com/video/${id}?autoplay=1`;
+            }
+        } catch (error) {
+            console.log('Video URL normalization failed:', error);
+        }
+
+        return src;
+    }
+
+    function openModal(trigger) {
+        const src = trigger.getAttribute('data-video-src') || '';
+        const label = trigger.getAttribute('data-video-title') || 'Ukázka Bardio';
+
+        lastFocusedElement = document.activeElement;
+        if (title) title.textContent = label;
+
+        frame.replaceChildren(createVideoNode(src, label));
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('video-modal-open');
+
+        const closeButton = modal.querySelector('.video-modal-close');
+        if (closeButton) closeButton.focus();
+    }
+
+    function closeModal() {
+        if (modal.hidden) return;
+
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('video-modal-open');
+        frame.replaceChildren();
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+        }
+    }
+
+    openButtons.forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            openModal(button);
+        });
+    });
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeModal();
+    });
+}
+
 // Initialize audio player when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new AudioPlayer();
+    initVideoModal();
 });
 
 // Simple form handling (if you add a contact form)
@@ -416,7 +524,15 @@ class MusicPlayer {
         this.currentCategory = 'pop';
         this.isPlaying = false;
         this.audio = null;
-        this.tracks = {};
+        this.audioTrackKey = null;
+        this.categoryLabels = {
+            pop: 'Pop',
+            rock: 'Rock',
+            rap: 'Rap',
+            dojemne: 'Dojemné',
+            detske: 'Dětské',
+            dechovka: 'Dechovka'
+        };
         
         // Definice skladeb podle kategorií (klíče sjednocené s HTML)
         this.tracks = {
@@ -447,101 +563,172 @@ class MusicPlayer {
     }
     
     init() {
-        console.log('MusicPlayer init started');
         this.playerElement = document.getElementById('music-player');
-        console.log('Player element:', this.playerElement);
-        
-        if (!this.playerElement) {
-            console.error('Music player element not found');
+        if (!this.playerElement) return;
+
+        this.isSimple = this.playerElement.getAttribute('data-player-mode') === 'simple';
+        this.mainPlayButton = document.getElementById('player-main-play');
+        this.prevButton = document.getElementById('player-prev');
+        this.nextButton = document.getElementById('player-next');
+        this.currentTitleElement = document.getElementById('sample-player-heading');
+        this.currentStyleElement = document.getElementById('player-current-style');
+        this.currentTimeElement = document.getElementById('player-current-time');
+        this.durationElement = document.getElementById('player-duration');
+        this.progressBar = document.getElementById('player-progress');
+        this.progressTrack = this.playerElement.querySelector('.sample-progress-track');
+
+        if (this.isSimple) {
+            this.playlist = this.createSimplePlaylist();
+            this.setupEventListeners();
+            this.updateNowPlaying();
+            this.updatePlayButtons();
             return;
         }
-        
+
         this.tracksList = document.getElementById('tracks-list');
-        console.log('Tracks list element:', this.tracksList);
-        
-        if (!this.tracksList) {
-            console.error('Tracks list element not found');
-            return;
-        }
-        
+        if (!this.tracksList) return;
+
+        this.categoryTabs = this.playerElement.querySelectorAll('.category-tab');
         this.setupEventListeners();
         this.loadCategory('pop');
-        console.log('MusicPlayer init completed');
     }
     
     setupEventListeners() {
-        console.log('Setting up event listeners');
-        // Category tabs
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        console.log('Found category tabs:', categoryTabs.length);
-        
-        categoryTabs.forEach(tab => {
+        if (this.categoryTabs) this.categoryTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 const category = tab.getAttribute('data-category');
-                console.log('Category clicked:', category);
-                this.loadCategory(category);
+                if (category) this.loadCategory(category);
             });
+        });
+
+        if (this.mainPlayButton) {
+            this.mainPlayButton.addEventListener('click', () => {
+                this.toggleTrackPlay(this.currentTrack);
+            });
+        }
+
+        if (this.prevButton) {
+            this.prevButton.addEventListener('click', () => {
+                this.previousTrack(this.isPlaying);
+            });
+        }
+
+        if (this.nextButton) {
+            this.nextButton.addEventListener('click', () => {
+                this.nextTrack(this.isPlaying);
+            });
+        }
+
+        if (this.progressTrack) {
+            this.progressTrack.addEventListener('click', (event) => {
+                if (!this.audio) return;
+                const duration = this.getDuration();
+                if (!duration) return;
+
+                const rect = this.progressTrack.getBoundingClientRect();
+                const ratio = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
+                this.audio.currentTime = ratio * duration;
+                this.updateProgress();
+            });
+        }
+    }
+
+    createSimplePlaylist() {
+        return Object.entries(this.tracks).flatMap(([category, tracks]) => {
+            const genre = this.categoryLabels[category];
+            return tracks.map(track => ({ ...track, category, genre }));
         });
     }
     
     loadCategory(category) {
+        if (!this.tracks[category]) return;
+
+        if (this.audio) {
+            this.audio.pause();
+            this.audio = null;
+            this.audioTrackKey = null;
+        }
+
         this.currentCategory = category;
         this.currentTrack = 0;
-        this.isPlaying = false; // Reset playing state when switching categories
+        this.isPlaying = false;
         
-        // Update active tab
-        document.querySelectorAll('.category-tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        document.querySelector(`[data-category="${category}"]`).classList.add('active');
-        
-        // Load tracks
+        this.updateCategoryTabs();
         this.renderTracks();
+        this.updateNowPlaying();
+        this.updateProgress();
     }
     
     renderTracks() {
-        console.log('Rendering tracks for category:', this.currentCategory);
-        if (!this.tracksList) {
-            console.error('Tracks list not found');
-            return;
-        }
+        if (!this.tracksList) return;
         
         const tracks = this.tracks[this.currentCategory] || [];
-        console.log('Tracks found:', tracks.length);
-        
-        this.tracksList.innerHTML = tracks.map((track, index) => `
-            <div class="track-item" data-index="${index}">
-                <div class="track-info">
-                    <div class="track-title">${track.title}</div>
-                </div>
-                <button class="track-play-btn" data-index="${index}">▶</button>
-            </div>
-        `).join('');
-        
-        console.log('Tracks rendered, setting up click listeners');
-        
-        // Add click listeners to entire track items
+        this.tracksList.innerHTML = '';
+
+        tracks.forEach((track, index) => {
+            const item = document.createElement('div');
+            item.className = 'track-item';
+            item.dataset.index = String(index);
+            item.tabIndex = 0;
+            item.setAttribute('role', 'button');
+            item.setAttribute('aria-label', `Vybrat ukázku: ${track.title}`);
+
+            const number = document.createElement('span');
+            number.className = 'track-index';
+            number.textContent = String(index + 1).padStart(2, '0');
+
+            const info = document.createElement('div');
+            info.className = 'track-info';
+
+            const title = document.createElement('div');
+            title.className = 'track-title';
+            title.textContent = track.title;
+
+            const meta = document.createElement('div');
+            meta.className = 'track-duration';
+            meta.textContent = `${this.categoryLabels[this.currentCategory]} · ${this.formatTime(track.duration)}`;
+
+            const playButton = document.createElement('button');
+            playButton.className = 'track-play-btn';
+            playButton.type = 'button';
+            playButton.dataset.index = String(index);
+            playButton.setAttribute('aria-label', `Přehrát ukázku: ${track.title}`);
+            playButton.textContent = '▶';
+
+            info.append(title, meta);
+            item.append(number, info, playButton);
+            this.tracksList.append(item);
+        });
+
         this.tracksList.querySelectorAll('.track-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 const index = parseInt(item.getAttribute('data-index'));
-                console.log('Track item clicked:', index);
+                this.toggleTrackPlay(index);
+            });
+
+            item.addEventListener('keydown', (e) => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                const index = parseInt(item.getAttribute('data-index'));
                 this.toggleTrackPlay(index);
             });
         });
         
-        // Add click listeners to play buttons (prevent event bubbling)
         this.tracksList.querySelectorAll('.track-play-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const index = parseInt(btn.getAttribute('data-index'));
-                console.log('Track play button clicked:', index);
                 this.toggleTrackPlay(index);
             });
         });
+
+        this.updatePlayButtons();
     }
     
     toggleTrackPlay(index) {
-        // If same track is clicked, toggle play/pause
+        const tracks = this.getCurrentPlaylist();
+        if (!Number.isInteger(index) || index < 0 || index >= tracks.length) return;
+
         if (this.currentTrack === index && this.audio) {
             if (this.isPlaying) {
                 this.pause();
@@ -549,36 +736,42 @@ class MusicPlayer {
                 this.play();
             }
         } else {
-            // Different track, play it
             this.currentTrack = index;
             this.play();
         }
     }
     
     play() {
-        const track = this.tracks[this.currentCategory][this.currentTrack];
+        const track = this.getCurrentTrack();
         if (!track) return;
-        
-        if (this.audio) {
-            this.audio.pause();
+
+        const trackKey = this.getCurrentTrackKey();
+        if (this.audioTrackKey !== trackKey) {
+            if (this.audio) {
+                this.audio.pause();
+            }
+
+            this.audio = new Audio(track.file);
+            this.audioTrackKey = trackKey;
+            this.audio.addEventListener('loadedmetadata', () => {
+                this.updateTimeDisplay();
+            });
+            this.audio.addEventListener('timeupdate', () => {
+                this.updateProgress();
+            });
+            this.audio.addEventListener('ended', () => {
+                this.nextTrack(true);
+            });
         }
-        
-        this.audio = new Audio(track.file);
-        this.audio.addEventListener('loadedmetadata', () => {
-            console.log('Audio loaded, updating time display');
-            this.updateTimeDisplay();
-        });
-        this.audio.addEventListener('timeupdate', () => {
-            this.updateProgress();
-        });
-        this.audio.addEventListener('ended', () => {
-            this.nextTrack();
-        });
-        
+
+        this.updateNowPlaying();
+
         this.audio.play().then(() => {
             this.isPlaying = true;
             this.updatePlayButtons();
         }).catch(error => {
+            this.isPlaying = false;
+            this.updatePlayButtons();
             console.log('Playback failed:', error);
         });
     }
@@ -590,24 +783,157 @@ class MusicPlayer {
         this.isPlaying = false;
         this.updatePlayButtons();
     }
-    
-    updatePlayButtons() {
-        // Update all play buttons
-        this.tracksList.querySelectorAll('.track-play-btn').forEach((btn, index) => {
-            if (index === this.currentTrack && this.isPlaying) {
-                btn.textContent = '⏸';
-                btn.classList.add('playing');
-            } else {
-                btn.textContent = '▶';
-                btn.classList.remove('playing');
-            }
+
+    updateCategoryTabs() {
+        if (!this.categoryTabs) return;
+        this.categoryTabs.forEach(tab => {
+            const isActive = tab.getAttribute('data-category') === this.currentCategory;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', String(isActive));
         });
     }
+
+    updateNowPlaying() {
+        const track = this.getCurrentTrack();
+        if (!track) return;
+
+        if (this.currentTitleElement) {
+            this.currentTitleElement.textContent = track.title;
+        }
+
+        if (this.currentStyleElement) {
+            const genre = track.genre || this.categoryLabels[this.currentCategory];
+            this.currentStyleElement.textContent = this.isSimple ? genre : `${genre} · Bardio originál`;
+        }
+
+        if (this.durationElement) {
+            this.durationElement.textContent = this.formatTime(this.getDuration());
+        }
+
+        if (this.currentTimeElement && !this.audio) {
+            this.currentTimeElement.textContent = '0:00';
+        }
+    }
+
+    updateTimeDisplay() {
+        this.updateNowPlaying();
+        this.updateProgress();
+    }
+
+    updateProgress() {
+        const duration = this.getDuration();
+        const currentTime = this.audio && this.audioTrackKey === this.getCurrentTrackKey()
+            ? this.audio.currentTime
+            : 0;
+        const progress = duration ? Math.min((currentTime / duration) * 100, 100) : 0;
+
+        if (this.currentTimeElement) {
+            this.currentTimeElement.textContent = this.formatTime(currentTime);
+        }
+
+        if (this.durationElement) {
+            this.durationElement.textContent = this.formatTime(duration);
+        }
+
+        if (this.progressBar) {
+            this.progressBar.style.width = `${progress}%`;
+        }
+
+        if (this.progressTrack) {
+            this.progressTrack.setAttribute('aria-valuenow', String(Math.round(progress)));
+        }
+    }
     
-    nextTrack() {
-        const tracks = this.tracks[this.currentCategory];
+    updatePlayButtons() {
+        if (this.tracksList) this.tracksList.querySelectorAll('.track-item').forEach((item, index) => {
+            const isCurrent = index === this.currentTrack;
+            item.classList.toggle('active', isCurrent);
+            item.setAttribute('aria-pressed', String(isCurrent));
+        });
+
+        if (this.tracksList) this.tracksList.querySelectorAll('.track-play-btn').forEach((btn, index) => {
+            const isCurrentPlaying = index === this.currentTrack && this.isPlaying;
+            btn.textContent = isCurrentPlaying ? '⏸' : '▶';
+            btn.classList.toggle('playing', isCurrentPlaying);
+        });
+
+        if (this.mainPlayButton) {
+            this.mainPlayButton.textContent = this.isPlaying ? '⏸' : '▶';
+            this.mainPlayButton.classList.toggle('playing', this.isPlaying);
+            this.mainPlayButton.setAttribute(
+                'aria-label',
+                this.isPlaying ? 'Pozastavit aktuální ukázku' : 'Přehrát aktuální ukázku'
+            );
+        }
+    }
+
+    getCurrentTrack() {
+        const tracks = this.getCurrentPlaylist();
+        return tracks[this.currentTrack];
+    }
+
+    getCurrentPlaylist() {
+        return this.isSimple ? this.playlist : (this.tracks[this.currentCategory] || []);
+    }
+
+    getCurrentTrackKey() {
+        return this.isSimple ? `simple:${this.currentTrack}` : `${this.currentCategory}:${this.currentTrack}`;
+    }
+
+    getDuration() {
+        const track = this.getCurrentTrack();
+        if (this.audio && Number.isFinite(this.audio.duration)) {
+            return this.audio.duration;
+        }
+        return track ? track.duration : 0;
+    }
+
+    formatTime(seconds) {
+        if (!Number.isFinite(seconds) || seconds < 0) {
+            return '0:00';
+        }
+
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${minutes}:${remainingSeconds}`;
+    }
+    
+    nextTrack(autoplay = false) {
+        const tracks = this.getCurrentPlaylist();
+        if (!tracks.length) return;
+        if (this.audio) {
+            this.audio.pause();
+        }
+
         this.currentTrack = (this.currentTrack + 1) % tracks.length;
-        if (this.isPlaying) {
+        this.audio = null;
+        this.audioTrackKey = null;
+        this.isPlaying = false;
+        this.updateNowPlaying();
+        this.updateProgress();
+        this.updatePlayButtons();
+
+        if (autoplay) {
+            this.play();
+        }
+    }
+
+    previousTrack(autoplay = false) {
+        const tracks = this.getCurrentPlaylist();
+        if (!tracks.length) return;
+        if (this.audio) {
+            this.audio.pause();
+        }
+
+        this.currentTrack = (this.currentTrack - 1 + tracks.length) % tracks.length;
+        this.audio = null;
+        this.audioTrackKey = null;
+        this.isPlaying = false;
+        this.updateNowPlaying();
+        this.updateProgress();
+        this.updatePlayButtons();
+
+        if (autoplay) {
             this.play();
         }
     }
@@ -615,8 +941,7 @@ class MusicPlayer {
 
 function initMusicPlayer() {
     const playerEl = document.getElementById('music-player');
-    const tracksEl = document.getElementById('tracks-list');
-    if (!playerEl || !tracksEl) return;            // nic nespouštěj, když tu UI není
+    if (!playerEl) return;                         // nic nespouštěj, když tu UI není
     if (window.__musicInitDone) return;            // idempotence
     window.__musicInitDone = true;
     try { 
@@ -734,56 +1059,83 @@ function initParallax() {
 
 // Jednoduchý carousel pro reference na homepage
 function initReviewsCarousel() {
+    const carousel = document.querySelector('.reviews-carousel');
     const track = document.querySelector('.reviews-track');
-    const cards = document.querySelectorAll('.review-card');
+    const cards = Array.from(document.querySelectorAll('.review-card'));
     const prevBtn = document.querySelector('.reviews-prev');
     const nextBtn = document.querySelector('.reviews-next');
-    const dots = document.querySelectorAll('.reviews-dot');
+    const dots = Array.from(document.querySelectorAll('.reviews-dot'));
 
     if (!track || cards.length === 0 || !prevBtn || !nextBtn) return;
 
     let currentIndex = 0;
+    let autoTimer = null;
+
+    function getRelativeIndex(index) {
+        return (index - currentIndex + cards.length) % cards.length;
+    }
 
     function updateCarousel(index) {
         currentIndex = (index + cards.length) % cards.length;
-        const offset = -currentIndex * 100;
-        track.style.transform = `translateX(${offset}%)`;
+        track.style.transform = '';
 
         cards.forEach((card, i) => {
-            card.classList.toggle('active', i === currentIndex);
+            const relativeIndex = getRelativeIndex(i);
+            const isActive = relativeIndex === 0;
+            const isVisible = relativeIndex < Math.min(cards.length, 3);
+
+            card.classList.toggle('active', isActive);
+            card.classList.toggle('is-visible', isVisible);
+            card.classList.toggle('is-hidden', !isVisible);
+            card.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
         });
+
         dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === currentIndex);
+            dot.setAttribute('aria-current', i === currentIndex ? 'true' : 'false');
         });
     }
 
+    function stopAutoSlide() {
+        if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+        }
+    }
+
     prevBtn.addEventListener('click', () => {
+        stopAutoSlide();
         updateCarousel(currentIndex - 1);
     });
 
     nextBtn.addEventListener('click', () => {
+        stopAutoSlide();
         updateCarousel(currentIndex + 1);
     });
 
     dots.forEach(dot => {
         dot.addEventListener('click', () => {
+            stopAutoSlide();
             const idx = parseInt(dot.getAttribute('data-index'), 10) || 0;
             updateCarousel(idx);
         });
     });
 
+    cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            if (index === currentIndex) return;
+            stopAutoSlide();
+            updateCarousel(index);
+        });
+    });
+
     // Jednoduchý auto-slide, který se zastaví při první interakci
-    let autoTimer = setInterval(() => {
+    autoTimer = setInterval(() => {
         updateCarousel(currentIndex + 1);
     }, 9000);
 
     ['mouseenter', 'focusin'].forEach(evt => {
-        track.addEventListener(evt, () => {
-            if (autoTimer) {
-                clearInterval(autoTimer);
-                autoTimer = null;
-            }
-        }, { once: true });
+        (carousel || track).addEventListener(evt, stopAutoSlide, { once: true });
     });
 
     updateCarousel(0);

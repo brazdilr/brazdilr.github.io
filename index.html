@@ -86,7 +86,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="homepage">
     <!-- Google Tag Manager (noscript) -->
@@ -180,7 +180,7 @@
                         Vy dirigujete, textař ladí, technologie komponuje. Vznikne písnička od srdce, která vydá za tisíc slov.
                     </p>
                     <div class="hero-actions">
-                        <a href="#samples" class="btn btn-primary">▶ Přehrát ukázky</a>
+                        <a href="#video-preview" class="btn btn-primary" data-video-modal-open data-video-src="" data-video-title="Ukázka Bardio">▶ Přehrát ukázky</a>
                         <a href="#how-it-works" class="btn btn-secondary">Jak to funguje <span aria-hidden="true">→</span></a>
                     </div>
                     <div class="author-note">
@@ -248,49 +248,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="audio-preview-column">
-                    <div class="audio-preview-card">
-                        <div class="preview-menu" aria-hidden="true">•••</div>
+                <div class="audio-preview-column" id="samples">
+                    <div class="audio-preview-card sample-player-card" id="music-player" data-player-mode="simple" aria-labelledby="sample-player-heading">
                         <p class="preview-label">Ukázka písničky</p>
-                        <h3>Pro náš velký den</h3>
-                        <p class="preview-origin">Bardio originál</p>
-                        <div class="cover-art" aria-hidden="true">
-                            <span>♡</span>
-                        </div>
-                        <div class="preview-controls" aria-hidden="true">
-                            <span class="preview-play">▶</span>
-                            <div class="preview-wave">
-                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                        <div class="sample-player-body">
+                            <div class="sample-cover" aria-hidden="true">
+                                <span>♡</span>
                             </div>
-                            <small>0:00 / 0:45</small>
+                            <div class="sample-player-current">
+                                <h3 id="sample-player-heading">Osobní duet ke dni matek</h3>
+                                <p class="preview-origin" id="player-current-style">Pop</p>
+                            </div>
                         </div>
-                        <div class="preview-note handwritten">Pusťte si ukázky naživo</div>
-                    </div>
-                </div>
-            </div>
 
-            
-            <!-- Samostatně přehrávač, o něco širší -->
-            <div id="samples"></div>
-            <h3 class="music-player-title">Poslechněte si ukázky</h3>
-            <div class="music-player-note">Další průběžně připravujeme</div>
-            <div class="music-player" id="music-player">
-                <div class="player-categories">
-                    <div class="category-tabs">
-                        <button class="category-tab active" data-category="pop">Pop</button>
-                        <button class="category-tab" data-category="rock">Rock</button>
-                        <button class="category-tab" data-category="rap">Rap</button>
-                        <button class="category-tab" data-category="dojemne">Dojemné</button>
-                        <button class="category-tab" data-category="detske">Dětské</button>
-                        <button class="category-tab" data-category="dechovka">Dechovka</button>
-                    </div>
-                    
-                    <div class="tracks-list" id="tracks-list">
-                        <!-- Tracks will be loaded here -->
+                        <div class="sample-player-controls" aria-label="Ovládání přehrávače">
+                            <button class="sample-skip-btn" id="player-prev" type="button" aria-label="Předchozí ukázka">‹</button>
+                            <button class="sample-main-play" id="player-main-play" type="button" aria-label="Přehrát aktuální ukázku">▶</button>
+                            <button class="sample-skip-btn" id="player-next" type="button" aria-label="Další ukázka">›</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     </section>
     
@@ -479,60 +457,90 @@
                 </div>
             </div>
 
-            <div class="reviews-carousel">
-                <h3 class="reviews-title">Co říkají ti, kterým už písnička hraje</h3>
-                <div class="reviews-window">
-                    <div class="reviews-track">
-                        <article class="review-card active" data-index="0">
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">
-                                „Písnička pro mamku nás všechny rozbrečela. Text přesně vystihl, co jsme chtěli říct, ale neuměli to dát do slov.“
-                            </p>
-                            <div class="review-meta">
-                                <span class="review-author">Lenka, písnička ke Dni matek</span>
-                            </div>
-                        </article>
-                        <article class="review-card" data-index="1">
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">
-                                „Měli jsme obavy, jak bude AI hudba působit, ale výsledek byl překvapivě osobní a lidský. Oslavenec si ji pouští doteď.“
-                            </p>
-                            <div class="review-meta">
-                                <span class="review-author">Pavel, narozeninová oslava</span>
-                            </div>
-                        </article>
-                        <article class="review-card" data-index="2">
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">
-                                „Potřebovali jsme rychle písničku k videu pro prarodiče. Zadání, konzultace, hotovo – během jednoho dne. Velká úleva.“
-                            </p>
-                            <div class="review-meta">
-                                <span class="review-author">Veronika, rodinné video</span>
-                            </div>
-                        </article>
-                        <article class="review-card" data-index="3">
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">
-                                „Textař nám pomohl doladit text, který jsme měli jen v náčrtu. Výsledná verze zněla, jako by nás znal roky.“
-                            </p>
-                            <div class="review-meta">
-                                <span class="review-author">Honza, píseň pro partnerku</span>
-                            </div>
-                        </article>
+        </div>
+
+        <div class="reviews-band">
+            <div class="container">
+                <div class="reviews-carousel" aria-label="Reference zákazníků">
+                    <div class="reviews-heading">
+                        <h3 class="reviews-title">
+                            Co říkají ti,<span>kterým už písnička hraje</span>
+                        </h3>
                     </div>
-                </div>
-                <div class="reviews-controls">
-                    <button class="reviews-arrow reviews-prev" aria-label="Předchozí reference">◀</button>
-                    <div class="reviews-dots" aria-hidden="true">
-                        <button class="reviews-dot active" data-index="0"></button>
-                        <button class="reviews-dot" data-index="1"></button>
-                        <button class="reviews-dot" data-index="2"></button>
-                        <button class="reviews-dot" data-index="3"></button>
+                    <div class="reviews-window">
+                        <div class="reviews-track">
+                            <article class="review-card active is-visible" data-index="0">
+                                <div class="review-stars" aria-label="5 hvězdiček z 5">★★★★★</div>
+                                <p class="review-text">
+                                    „Píseň předčila naše očekávání. Dojalo nás to do slz.“
+                                </p>
+                                <div class="review-meta">
+                                    <span class="review-avatar" aria-hidden="true">JT</span>
+                                    <span>
+                                        <span class="review-author">Jana & Tomáš</span>
+                                        <span class="review-context">svatební píseň</span>
+                                    </span>
+                                </div>
+                                <span class="review-card-art review-card-art--heart" aria-hidden="true">♥</span>
+                            </article>
+                            <article class="review-card is-visible" data-index="1">
+                                <div class="review-stars" aria-label="5 hvězdiček z 5">★★★★★</div>
+                                <p class="review-text">
+                                    „Skvělý text, krásná hudba. Přesně vystihli, co jsme chtěli.“
+                                </p>
+                                <div class="review-meta">
+                                    <span class="review-avatar" aria-hidden="true">M</span>
+                                    <span>
+                                        <span class="review-author">Martin</span>
+                                        <span class="review-context">narozeninová píseň</span>
+                                    </span>
+                                </div>
+                                <span class="review-card-art review-card-art--note" aria-hidden="true">♫</span>
+                            </article>
+                            <article class="review-card is-visible" data-index="2">
+                                <div class="review-stars" aria-label="5 hvězdiček z 5">★★★★★</div>
+                                <p class="review-text">
+                                    „Rychlé, milé a profesionální. Určitě doporučuji!“
+                                </p>
+                                <div class="review-meta">
+                                    <span class="review-avatar" aria-hidden="true">E</span>
+                                    <span>
+                                        <span class="review-author">Eliška</span>
+                                        <span class="review-context">píseň pro maminku</span>
+                                    </span>
+                                </div>
+                                <span class="review-card-art review-card-art--star" aria-hidden="true">★</span>
+                            </article>
+                            <article class="review-card is-hidden" data-index="3">
+                                <div class="review-stars" aria-label="5 hvězdiček z 5">★★★★★</div>
+                                <p class="review-text">
+                                    „Textař nám pomohl doladit text, který jsme měli jen v náčrtu.“
+                                </p>
+                                <div class="review-meta">
+                                    <span class="review-avatar" aria-hidden="true">H</span>
+                                    <span>
+                                        <span class="review-author">Honza</span>
+                                        <span class="review-context">píseň pro partnerku</span>
+                                    </span>
+                                </div>
+                                <span class="review-card-art review-card-art--note" aria-hidden="true">♪</span>
+                            </article>
+                        </div>
                     </div>
-                    <button class="reviews-arrow reviews-next" aria-label="Další reference">▶</button>
-                </div>
-                <div class="reviews-cta">
-                    <a href="reference.html" class="btn btn-primary">Ukázat další reference</a>
+                    <p class="reviews-source-note">Reference pochází od skutečných zákazníků. Pochází z Google profilu, Facebook recenzí i e-mailové komunikace.</p>
+                    <div class="reviews-controls">
+                        <button class="reviews-arrow reviews-prev" type="button" aria-label="Předchozí reference">‹</button>
+                        <div class="reviews-dots" aria-label="Vybrat referenci">
+                            <button class="reviews-dot active" type="button" data-index="0" aria-label="Reference 1"></button>
+                            <button class="reviews-dot" type="button" data-index="1" aria-label="Reference 2"></button>
+                            <button class="reviews-dot" type="button" data-index="2" aria-label="Reference 3"></button>
+                            <button class="reviews-dot" type="button" data-index="3" aria-label="Reference 4"></button>
+                        </div>
+                        <button class="reviews-arrow reviews-next" type="button" aria-label="Další reference">›</button>
+                    </div>
+                    <div class="reviews-cta">
+                        <a href="reference.html" class="btn btn-primary">Ukázat další reference</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -691,6 +699,17 @@
     <button class="floating-audio-btn" id="floating-audio-btn" style="display: none;">
         ▶
     </button>
+
+    <div class="video-modal" id="video-preview" aria-hidden="true" hidden>
+        <div class="video-modal-backdrop" data-video-modal-close></div>
+        <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
+            <button class="video-modal-close" type="button" data-video-modal-close aria-label="Zavřít video">×</button>
+            <h2 class="sr-only" id="video-modal-title">Ukázka Bardio</h2>
+            <div class="video-modal-frame" id="video-modal-frame">
+                <p class="video-modal-empty">Video zatím není připojené.</p>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
