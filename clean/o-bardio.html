@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Bardio | Bardio</title>
     <meta name="description" content="Poznejte Bardio: projekt osobních písniček, příběh zakladatele Radka Brázdila a spojení textařské tvorby s AI.">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#fff6e8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -14,8 +20,8 @@
     <header class="site-header">
         <nav class="nav container" aria-label="Hlavní navigace">
             <a class="brand" href="index.html#home" aria-label="Bardio - úvod">
+                <img class="brand-logo" src="assets/img/brand/bardio-logo-mark.webp" alt="" width="60" height="33">
                 <span class="brand-text">Bardio</span>
-                <span class="brand-note" aria-hidden="true">♪</span>
             </a>
 
             <button class="menu-toggle" type="button" aria-label="Otevřít menu" aria-controls="nav-menu" aria-expanded="false">
@@ -25,13 +31,10 @@
             </button>
 
             <div class="nav-links" id="nav-menu">
-                <a href="index.html#samples">Ukázky písniček</a>
                 <a href="jak-to-funguje.html">Jak to funguje</a>
                 <a href="o-bardio.html" aria-current="page">O Bardio</a>
-                <a href="index.html#pricing">Ceník</a>
-                <a href="index.html#faq">FAQ</a>
                 <a href="kontakt.html">Kontakt</a>
-                <a class="nav-cta" href="kontakt.html">Začít objednávku</a>
+                <a class="nav-cta" href="objednavka.html">Vytvořit objednávku</a>
             </div>
         </nav>
     </header>
@@ -137,12 +140,22 @@
     <footer class="site-footer">
         <div class="container footer-grid">
             <div>
-                <div class="footer-brand">Bardio</div>
+                <div class="footer-brand-row">
+                    <img class="footer-logo" src="assets/img/brand/bardio-logo-mark.webp" alt="" width="60" height="33">
+                    <div class="footer-brand">Bardio</div>
+                </div>
                 <p>Osobní písničky od textaře.</p>
             </div>
             <div>
                 <a href="mailto:podpora@bardio.cz">podpora@bardio.cz</a>
                 <a href="tel:+420732945290">+420 732 945 290</a>
+            </div>
+            <div class="footer-links">
+                <a href="obchodni-podminky-bardio.html">Obchodní podmínky</a>
+                <a href="zpracovani-osobnich-udaju.html">Zpracování osobních údajů</a>
+            </div>
+            <div class="footer-payment" aria-label="Podporované platební metody">
+                <img src="assets/img/footer/payment-methods.png" alt="Platby zajišťuje Comgate. Podporujeme Visa, Mastercard, Google Pay a Apple Pay.">
             </div>
         </div>
     </footer>
