@@ -128,50 +128,107 @@ function initSamplePlayer() {
 }
 
 function initReviews() {
+    const track = document.querySelector("[data-reviews]");
     const cards = Array.from(document.querySelectorAll("[data-review-card]"));
     const dots = Array.from(document.querySelectorAll("[data-review-dot]"));
     const prevButton = document.querySelector("[data-review-prev]");
     const nextButton = document.querySelector("[data-review-next]");
 
-    if (!cards.length || !prevButton || !nextButton) return;
+    if (!track || !cards.length || !prevButton || !nextButton) return;
 
     let current = 0;
+    let scrollFrame = null;
+    let resizeTimer = null;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    function relativeIndex(index) {
-        return (index - current + cards.length) % cards.length;
+    function clampIndex(index) {
+        return Math.max(0, Math.min(cards.length - 1, index));
     }
 
-    function render(index) {
-        current = (index + cards.length) % cards.length;
+    function updateState(index) {
+        current = clampIndex(index);
 
         cards.forEach((card, cardIndex) => {
-            const position = relativeIndex(cardIndex);
-            const isActive = position === 0;
-            const isVisible = position < Math.min(cards.length, 3);
-
+            const isActive = cardIndex === current;
             card.classList.toggle("is-active", isActive);
-            card.classList.toggle("is-visible", isVisible);
-            card.classList.toggle("is-hidden", !isVisible);
-            card.setAttribute("aria-hidden", isVisible ? "false" : "true");
+            if (isActive) {
+                card.setAttribute("aria-current", "true");
+            } else {
+                card.removeAttribute("aria-current");
+            }
         });
 
         dots.forEach((dot, dotIndex) => {
             const isActive = dotIndex === current;
             dot.classList.toggle("is-active", isActive);
-            dot.setAttribute("aria-current", String(isActive));
+            if (isActive) {
+                dot.setAttribute("aria-current", "true");
+            } else {
+                dot.removeAttribute("aria-current");
+            }
+        });
+
+        prevButton.disabled = current === 0;
+        nextButton.disabled = current === cards.length - 1;
+    }
+
+    function closestCardIndex() {
+        const trackRect = track.getBoundingClientRect();
+        const trackCenter = trackRect.left + trackRect.width / 2;
+
+        return cards.reduce((closestIndex, card, cardIndex) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const closestRect = cards[closestIndex].getBoundingClientRect();
+            const closestCenter = closestRect.left + closestRect.width / 2;
+
+            return Math.abs(cardCenter - trackCenter) < Math.abs(closestCenter - trackCenter)
+                ? cardIndex
+                : closestIndex;
+        }, 0);
+    }
+
+    function scrollToCard(index, behavior = "smooth") {
+        const nextIndex = clampIndex(index);
+        const card = cards[nextIndex];
+        const left = card.offsetLeft - (track.clientWidth - card.clientWidth) / 2;
+
+        updateState(nextIndex);
+        track.scrollTo({
+            left,
+            behavior: prefersReducedMotion.matches ? "auto" : behavior
         });
     }
 
-    prevButton.addEventListener("click", () => render(current - 1));
-    nextButton.addEventListener("click", () => render(current + 1));
+    track.addEventListener("scroll", () => {
+        if (scrollFrame) cancelAnimationFrame(scrollFrame);
+        scrollFrame = requestAnimationFrame(() => {
+            updateState(closestCardIndex());
+            scrollFrame = null;
+        });
+    }, { passive: true });
+
+    track.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        scrollToCard(current + (event.key === "ArrowRight" ? 1 : -1));
+    });
+
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => scrollToCard(current, "auto"), 120);
+    });
+
+    prevButton.addEventListener("click", () => scrollToCard(current - 1));
+    nextButton.addEventListener("click", () => scrollToCard(current + 1));
 
     dots.forEach((dot) => {
         dot.addEventListener("click", () => {
-            render(Number(dot.dataset.reviewDot || 0));
+            scrollToCard(Number(dot.dataset.reviewDot || 0));
         });
     });
 
-    render(0);
+    scrollToCard(0, "auto");
 }
 
 function initFaq() {
