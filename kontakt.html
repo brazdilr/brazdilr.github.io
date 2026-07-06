@@ -3,190 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt – Bardio.cz</title>
-    <meta name="description" content="Kontaktujte nás – Bardio.cz. E‑mail, telefon, adresa, fakturační údaje.">
+    <title>Kontakt | Bardio</title>
+    <meta name="description" content="Kontaktujte Bardio. Pomůžeme s objednávkou osobní písničky a zodpovíme vaše dotazy.">
 
-       <!-- CookieBot -->
-       <script id="Cookiebot"
-       src="https://consent.cookiebot.com/uc.js"
-       data-cbid="3bab6f3c-7492-44ab-8317-044bae98d2bc"
-       data-blockingmode="auto"
-       type="text/javascript"></script>
+      <!-- CookieBot -->
+    <script id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="3bab6f3c-7492-44ab-8317-044bae98d2bc"
+        data-blockingmode="auto"
+        type="text/javascript"></script>
 
-         <!-- výchozí zamítnutí consentmode -->
-   <script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){ dataLayer.push(arguments); }
- gtag('consent', 'default', {
-   ad_storage: 'denied',
-   analytics_storage: 'denied',
-   ad_user_data: 'denied',
-   ad_personalization: 'denied',
-   security_storage: 'granted' // běžná praxe
- });
+          <!-- výchozí zamítnutí consentmode -->
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    security_storage: 'granted' // běžná praxe
+  });
 </script>
-   
-   <!-- Google Tag Manager -->
-   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-   })(window,document,'script','dataLayer','GTM-KQR2WCBM');</script>
-   <!-- End Google Tag Manager -->
-    
-       <!-- Meta Pixel (Cookiebot prior consent) -->
-<script type="text/plain" data-cookieconsent="marketing">
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document, 'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-  
-    fbq('init', '1161795822293404');
-    fbq('track', 'PageView');
-  </script>
-  <!-- End Meta Pixel -->
-   
 
-    <!-- Google Fonts + Global styles -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KQR2WCBM');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Meta Pixel (Cookiebot prior consent) -->
+    <script type="text/plain" data-cookieconsent="marketing">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '1161795822293404');
+        fbq('track', 'PageView');
+      </script>
+      <!-- End Meta Pixel -->
+
+     <!-- Měření na 75 % scroll -->
+     <script>
+        document.addEventListener('scroll', function () {
+          try {
+            if (window.Cookiebot?.consent?.marketing && typeof fbq === 'function') {
+              const depth = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+              if (depth >= 0.75 && !window.scrollTracked) {
+                fbq('trackCustom', 'Scrolled75');
+                window.scrollTracked = true;
+              }
+            }
+          } catch(e) { /* nic neodesílej */ }
+        });
+        </script>
+        <!-- Měření na 75 % scroll -->
+
+<!-- Open Graph -->
+    <meta property="og:image" content="https://www.bardio.cz/images/open_graph/og_1_hp.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://www.bardio.cz/kontakt.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="cs_CZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bardio.cz – Osobní písnička na míru">
+    <meta name="twitter:description" content="Kontaktujte Bardio. Pomůžeme s objednávkou osobní písničky a zodpovíme vaše dotazy.">
+    <meta name="twitter:image" content="https://www.bardio.cz/images/open_graph/og_1_hp.jpg">
+
+    <link rel="canonical" href="https://www.bardio.cz/kontakt.html">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#fff6e8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <style>
-        /* Page-specific light background */
-        body { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%); }
-
-        .contact-wrapper { background: rgba(255,255,255,0.95); border-radius: 20px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.08); backdrop-filter: blur(10px); }
-        .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center; }
-        .contact-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .contact-lead { color: var(--gray-700); margin-bottom: 1.25rem; }
-        .contact-block { border: 1px solid var(--gray-200); border-radius: 12px; padding: 1rem 1.25rem; background: linear-gradient(135deg, var(--gray-50), #f8fafc); }
-        .contact-block + .contact-block { margin-top: 0.75rem; }
-        .contact-block h3 { font-size: 1rem; margin-bottom: 0.25rem; color: var(--gray-900); }
-        .contact-block p { margin: 0.1rem 0; color: var(--gray-700); }
-        .contact-logo { text-align: center; }
-        .contact-logo img { max-width: 360px; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 30px rgba(15,23,42,0.12); }
-
-        @media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; text-align: left; } .contact-logo { order: -1; margin-bottom: 0.5rem; } }
-        @media (max-width: 480px) { .contact-wrapper { padding: 1.25rem; } .contact-title { font-size: 1.75rem; } }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="logo">
-                    <a href="index.html#home">🎵 Bardio</a>
-                </div>
-                
-                <div class="nav-menu" id="nav-menu">
-                    <a href="index.html#home" class="nav-link">Domů</a>
-                    <a href="index.html#services" class="nav-link">Služby</a>
-                    <a href="jak-to-funguje.html" class="nav-link">Jak to funguje</a>
-                    <a href="index.html#contact" class="nav-link">Kontakt</a>
-                    <a href="index.html#contact" class="nav-btn">Vytvořit zadání</a>
-                </div>
-                
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQR2WCBM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header class="site-header">
+        <nav class="nav container" aria-label="Hlavní navigace">
+            <a class="brand" href="index.html#home" aria-label="Bardio - úvod">
+                <img class="brand-logo" src="assets/img/brand/bardio-logo-mark.webp" alt="" width="60" height="33">
+                <span class="brand-text">Bardio</span>
+            </a>
+
+            <button class="menu-toggle" type="button" aria-label="Otevřít menu" aria-controls="nav-menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-links" id="nav-menu">
+                <a href="jak-to-funguje.html">Jak to funguje</a>
+                <a href="garance-spokojenosti.html">Garance</a>
+                <a href="o-bardio.html">O Bardio</a>
+                <a href="kontakt.html" aria-current="page">Kontakt</a>
+                <a class="nav-cta" href="objednavka.html">Vytvořit objednávku</a>
             </div>
         </nav>
     </header>
 
-    <main class="container" style="padding-top: 2rem; padding-bottom: 3rem;">
-        <div class="contact-wrapper">
-            <div class="contact-grid">
-                <div>
-                    <h1 class="contact-title">Kontakt</h1>
-                    <p class="contact-lead">Ozvěte se nám – rádi zodpovíme dotazy a pomůžeme s objednávkou.</p>
+    <main>
+        <section class="contact-page-hero paper-section">
+            <div class="container contact-hero-grid">
+                <div class="contact-hero-copy">
+                    <p class="eyebrow">Bardio</p>
+                    <h1>Kontakt</h1>
+                    <p>Ozvěte se nám - rádi zodpovíme dotazy a pomůžeme s objednávkou.</p>
 
-                    <div class="contact-block">
-                        <h3>E‑mail</h3>
-                        <p><a href="mailto:podpora@bardio.cz">podpora@bardio.cz</a></p>
-                    </div>
-                    <div class="contact-block">
-                        <h3>Telefon</h3>
-                        <p><a href="tel:+420732945290">+420 732 945 290</a></p>
-                        <p>Nezvedáme vám telefon? Je možné, že právě tvoříme. Prosíme, pošlete SMS, ozveme se zpátky.</p>
-                    </div>
-                    <div class="contact-block">
-                        <h3>Fakturační údaje</h3>
-                        <p><strong>Mgr. Radek Brázdil</strong></p>
-                        <p>IČ: 87751381</p>
-                        <p>Komenského 449, 763 16 Fryšták</p>
+                    <div class="contact-detail-panel">
+                        <div class="contact-detail-list" aria-label="Kontaktní údaje">
+                            <a class="contact-detail-item" href="mailto:podpora@bardio.cz">
+                                <span>E-mail</span>
+                                <strong>podpora@bardio.cz</strong>
+                            </a>
+
+                            <a class="contact-detail-item" href="tel:+420732945290">
+                                <span>Telefon</span>
+                                <strong>+420 732 945 290</strong>
+                            </a>
+                        </div>
+
+                        <p class="contact-phone-note">Nezvedáme vám telefon? Je možné, že právě tvoříme. Prosíme, pošlete SMS, ozveme se zpátky.</p>
+
+                        <div class="contact-invoice-compact">
+                            <span>Fakturační údaje</span>
+                            <p><strong>Mgr. Radek Brázdil</strong> · IČ: 87751381 · Komenského 449, 763 16 Fryšták</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-logo">
-                    <img src="images/bard_dj.png" alt="Bardio – logo" />
-                </div>
+                <aside class="contact-portrait" aria-label="Radek Brázdil, textař a průvodce tvorbou">
+                    <div class="contact-portrait-visual">
+                        <img class="contact-founder-photo" src="assets/img/about/radek-brazdil.webp" alt="Radek Brázdil, textař a průvodce tvorbou.">
+                        <img class="contact-bard-image" src="assets/img/contact/bard-smile.webp" alt="" aria-hidden="true">
+                    </div>
+                    <p>Radek Brázdil · textař a průvodce tvorbou</p>
+                </aside>
             </div>
-        </div>
+        </section>
+
+        <div class="wave wave-top contact-footer-wave" aria-hidden="true"></div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">🎵 Bardio</div>
-                    <p>Vytváříme osobní písně na míru pro jakoukoliv příležitost. Pomocí technologií a pod dohledem textařů.</p>
-                    <div class="contact-info">
-                        <p>📧 <a href="mailto:podpora@bardio.cz">podpora@bardio.cz</a></p>
-                        <p>📞 +420 732 945 290</p>
-                    </div>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-brand-row">
+                    <img class="footer-logo" src="assets/img/brand/bardio-logo-mark.webp" alt="" width="60" height="33">
+                    <div class="footer-brand">Bardio</div>
                 </div>
-                
-                
-                
-                <div class="footer-section">
-                    <h4>Stránky</h4>
-                    <ul>
-                        <li><a href="jak-to-funguje.html">Jak to funguje</a></li>
-                        <li><a href="kontakt.html">Kontakt</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Právní informace</h4>
-                    <ul>
-                        <li><a href="obchodni-podminky-bardio.html">Obchodní podmínky</a></li>
-                        <li><a href="zpracovani-osobnich-udaju.html">Zpracování osobních údajů</a></li>
-                    </ul>
-                </div>
+                <p>Osobní písničky od textaře.</p>
             </div>
-            
-            <div class="footer-bottom">
-                <div class="payment-methods">
-                    <img src="platebni-metody.png" alt="Platební metody" class="payment-methods-img">
-                </div>
-                <p>&copy; 2025 Bardio.cz. Všechna práva vyhrazena.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">📘</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="YouTube">📺</a>
-                </div>
+            <div>
+                <a href="mailto:podpora@bardio.cz">podpora@bardio.cz</a>
+                <a href="tel:+420732945290">+420 732 945 290</a>
+            </div>
+            <div class="footer-links">
+                <a href="obchodni-podminky-bardio.html">Obchodní podmínky</a>
+                <a href="zpracovani-osobnich-udaju.html">Zpracování osobních údajů</a>
+            </div>
+            <div class="footer-payment" aria-label="Podporované platební metody">
+                <img src="assets/img/footer/payment-methods.png" alt="Platby zajišťuje Comgate. Podporujeme Visa, Mastercard, Google Pay a Apple Pay.">
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
-
-
-
-

@@ -5,6 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt | Bardio</title>
     <meta name="description" content="Kontaktujte Bardio. Pomůžeme s objednávkou osobní písničky a zodpovíme vaše dotazy.">
+
+      <!-- CookieBot -->
+    <script id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="3bab6f3c-7492-44ab-8317-044bae98d2bc"
+        data-blockingmode="auto"
+        type="text/javascript"></script>
+
+          <!-- výchozí zamítnutí consentmode -->
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    security_storage: 'granted' // běžná praxe
+  });
+</script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KQR2WCBM');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Meta Pixel (Cookiebot prior consent) -->
+    <script type="text/plain" data-cookieconsent="marketing">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '1161795822293404');
+        fbq('track', 'PageView');
+      </script>
+      <!-- End Meta Pixel -->
+
+     <!-- Měření na 75 % scroll -->
+     <script>
+        document.addEventListener('scroll', function () {
+          try {
+            if (window.Cookiebot?.consent?.marketing && typeof fbq === 'function') {
+              const depth = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+              if (depth >= 0.75 && !window.scrollTracked) {
+                fbq('trackCustom', 'Scrolled75');
+                window.scrollTracked = true;
+              }
+            }
+          } catch(e) { /* nic neodesílej */ }
+        });
+        </script>
+        <!-- Měření na 75 % scroll -->
+
+<!-- Open Graph -->
+    <meta property="og:image" content="https://www.bardio.cz/images/open_graph/og_1_hp.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://www.bardio.cz/kontakt.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="cs_CZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bardio.cz – Osobní písnička na míru">
+    <meta name="twitter:description" content="Kontaktujte Bardio. Pomůžeme s objednávkou osobní písničky a zodpovíme vaše dotazy.">
+    <meta name="twitter:image" content="https://www.bardio.cz/images/open_graph/og_1_hp.jpg">
+
+    <link rel="canonical" href="https://www.bardio.cz/kontakt.html">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -17,6 +90,11 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQR2WCBM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <header class="site-header">
         <nav class="nav container" aria-label="Hlavní navigace">
             <a class="brand" href="index.html#home" aria-label="Bardio - úvod">
