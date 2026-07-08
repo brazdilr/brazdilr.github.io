@@ -140,19 +140,58 @@ function initSamplePlayer() {
 function initReviews() {
     const track = document.querySelector("[data-reviews]");
     const cards = Array.from(document.querySelectorAll("[data-review-card]"));
-    const dots = Array.from(document.querySelectorAll("[data-review-dot]"));
+    const dotsContainer = document.querySelector("[data-review-dots]");
     const prevButton = document.querySelector("[data-review-prev]");
     const nextButton = document.querySelector("[data-review-next]");
 
-    if (!track || !cards.length || !prevButton || !nextButton) return;
+    if (!track || !cards.length || !dotsContainer || !prevButton || !nextButton) return;
 
     let current = 0;
+    let dots = [];
     let scrollFrame = null;
     let resizeTimer = null;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    function reviewGap() {
+        return parseFloat(getComputedStyle(track).gap || "0") || 0;
+    }
+
+    function visibleCount() {
+        if (!cards[0]) return 1;
+        const cardWidth = cards[0].getBoundingClientRect().width;
+        if (!cardWidth) return 1;
+        return Math.max(1, Math.min(cards.length, Math.round((track.clientWidth + reviewGap()) / (cardWidth + reviewGap()))));
+    }
+
+    function maxIndex() {
+        return Math.max(0, cards.length - visibleCount());
+    }
+
     function clampIndex(index) {
-        return Math.max(0, Math.min(cards.length - 1, index));
+        return Math.max(0, Math.min(maxIndex(), index));
+    }
+
+    function normalizeIndex(index) {
+        const last = maxIndex();
+        if (index < 0) return last;
+        if (index > last) return 0;
+        return index;
+    }
+
+    function buildDots() {
+        const count = maxIndex() + 1;
+        if (dots.length === count) return;
+
+        dotsContainer.textContent = "";
+        dots = Array.from({ length: count }, (_, dotIndex) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.dataset.reviewDot = String(dotIndex);
+            dot.setAttribute("aria-label", `Zobrazit reference ${dotIndex + 1}`);
+            dot.addEventListener("click", () => scrollToCard(dotIndex));
+            dotsContainer.append(dot);
+            return dot;
+        });
     }
 
     function updateState(index) {
@@ -177,31 +216,26 @@ function initReviews() {
                 dot.removeAttribute("aria-current");
             }
         });
-
-        prevButton.disabled = current === 0;
-        nextButton.disabled = current === cards.length - 1;
     }
 
     function closestCardIndex() {
-        const trackRect = track.getBoundingClientRect();
-        const trackCenter = trackRect.left + trackRect.width / 2;
+        const scrollLeft = track.scrollLeft;
 
         return cards.reduce((closestIndex, card, cardIndex) => {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const closestRect = cards[closestIndex].getBoundingClientRect();
-            const closestCenter = closestRect.left + closestRect.width / 2;
+            const cardLeft = card.offsetLeft - track.offsetLeft;
+            const closestLeft = cards[closestIndex].offsetLeft - track.offsetLeft;
 
-            return Math.abs(cardCenter - trackCenter) < Math.abs(closestCenter - trackCenter)
+            return Math.abs(cardLeft - scrollLeft) < Math.abs(closestLeft - scrollLeft)
                 ? cardIndex
                 : closestIndex;
         }, 0);
     }
 
     function scrollToCard(index, behavior = "smooth") {
-        const nextIndex = clampIndex(index);
+        buildDots();
+        const nextIndex = normalizeIndex(index);
         const card = cards[nextIndex];
-        const left = card.offsetLeft - (track.clientWidth - card.clientWidth) / 2;
+        const left = card.offsetLeft - track.offsetLeft;
 
         updateState(nextIndex);
         track.scrollTo({
@@ -226,18 +260,16 @@ function initReviews() {
 
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => scrollToCard(current, "auto"), 120);
+        resizeTimer = setTimeout(() => {
+            buildDots();
+            scrollToCard(clampIndex(current), "auto");
+        }, 120);
     });
 
     prevButton.addEventListener("click", () => scrollToCard(current - 1));
     nextButton.addEventListener("click", () => scrollToCard(current + 1));
 
-    dots.forEach((dot) => {
-        dot.addEventListener("click", () => {
-            scrollToCard(Number(dot.dataset.reviewDot || 0));
-        });
-    });
-
+    buildDots();
     scrollToCard(0, "auto");
 }
 
