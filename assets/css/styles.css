@@ -350,6 +350,18 @@ a {
     background: var(--coral);
 }
 
+.author-photo {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--paper);
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 14px rgba(8, 26, 61, 0.16);
+}
+
 .author-strip p {
     margin: 0;
     font-size: 0.94rem;
