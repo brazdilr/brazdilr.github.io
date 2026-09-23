@@ -2130,15 +2130,18 @@ a {
 
 @media (max-width: 720px) {
     .homepage-news-strip {
+        min-height: 54px;
         gap: 0.4rem;
         padding-inline: 0.65rem;
         font-size: 0.63rem;
+        line-height: 1.2;
     }
 
     .homepage-news-strip > span:nth-child(2) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        flex: 1 1 150px;
+        overflow: visible;
+        text-overflow: clip;
+        white-space: normal;
     }
 
     .container {
