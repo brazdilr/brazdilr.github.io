@@ -59,3 +59,6 @@ bardio-local/in/
 # Temporary files
 *.tmp
 *.temp
+
+# Local source for Žalud a listy mockups; never publish the source PDF
+pdf-zaludy.pdf
