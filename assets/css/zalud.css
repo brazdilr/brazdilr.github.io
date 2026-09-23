@@ -35,10 +35,8 @@
 .z-micro > span { padding: 0 .4rem; }
 .z-hero-visual { position: relative; height: 575px; min-width: 0; }
 .z-hero-note { position: absolute; top: 0; left: 9%; transform: rotate(-5deg); z-index: 2; }
-.z-artwork { position: absolute; top: 53px; width: 100%; transform: rotate(-3deg); border: 8px solid var(--paper-soft); border-radius: 6px; box-shadow: 0 12px 28px #38281120; overflow: hidden; }
-.z-artwork > img { width: 100%; height: auto; }
-.z-artwork-label { position: absolute; left: 0; bottom: 0; width: 100%; background: var(--ink); color: var(--paper); font-size: .73rem; padding: 10px 16px; }
-.z-artwork-label > span { padding-right: 8px; color: #f1c571; font-size: 1.15rem; }
+.z-artwork { position: absolute; top: 0; left: -6%; width: 112%; transform: rotate(-2deg); overflow: visible; }
+.z-artwork > img { width: 100%; height: auto; filter: drop-shadow(0 16px 20px rgba(56, 40, 17, .18)); }
 .z-paper-stack { position: absolute; right: 8px; top: 264px; width: 265px; height: 270px; }
 .z-paper-stack img { position: absolute; width: 156px; height: auto; box-shadow: 0 5px 17px #3e32232a; }
 .z-stack-back { right: 0; top: 10px; transform: rotate(13deg); }
@@ -177,7 +175,7 @@
     .z-hero-grid { grid-template-columns: 1fr 1fr; }
     .z-hero h1 { font-size: 5.2rem; }
     .z-hero-visual { height: 530px; }
-    .z-artwork { top: 80px; }
+    .z-artwork { top: 10px; left: -4%; width: 108%; }
     .z-hero-note { font-size: 1.45rem; top: 34px; }
     .z-paper-stack { top: 255px; width: 240px; }
     .z-paper-stack img { width: 140px; }
@@ -212,8 +210,7 @@
     .zalud-page .z-hero .z-micro { margin-top: 16px; font-size: .63rem; }
     .z-hero-visual { width: min(100%,470px); margin: 0 auto; height: 445px; }
     .z-hero-note { top: 14px; left: 8%; font-size: 1.5rem; }
-    .z-artwork { top: 55px; }
-    .z-artwork-label { font-size: .6rem; padding: 6px 10px; }
+    .z-artwork { top: 15px; left: -5%; width: 110%; }
     .z-paper-stack { top: 220px; right: 12px; width: 220px; height: 200px; }
     .z-paper-stack img { width: 120px; }
     .z-round-note { top: 310px; left: 5%; }
