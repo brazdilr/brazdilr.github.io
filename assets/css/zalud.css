@@ -209,11 +209,12 @@
     .z-hero-actions { align-items: center; margin-top: 22px; gap: 19px; }
     .z-buy-link { font-size: .88rem; }
     .zalud-page .z-hero .z-micro { margin-top: 16px; font-size: .63rem; }
-    .z-hero-visual { width: min(100%,470px); margin: 0 auto; height: 370px; }
+    .z-hero-visual { width: min(100%,470px); margin: 0 auto; height: 420px; }
     .z-hero-note { top: 14px; left: 8%; font-size: 1.5rem; }
     .z-artwork { top: 25px; left: 3%; width: 94%; }
-    .z-paper-stack, .z-hero-note, .z-paper-note, .z-visual-caption, .z-round-note { display: none; }
-    .z-paper-stack img { width: 120px; }
+    .z-paper-stack { display: block; top: auto; right: -3px; bottom: 120px; width: 180px; height: 155px; }
+    .z-paper-stack img { width: 82px; }
+    .z-hero-note, .z-paper-note, .z-visual-caption, .z-round-note { display: none; }
     .z-round-note { top: 310px; left: 5%; }
     .z-paper-note { bottom: 10px; right: 0; font-size: 1.3rem; }
     .zalud-page .z-visual-caption { font-size: .54rem; bottom: -7px !important; right: 0; }
@@ -279,7 +280,7 @@
     .z-mobile-buy .button { min-height: 42px; padding: .65rem 1.3rem; font-size: .85rem; }
 }
 @media (max-width: 380px) {
-    .z-hero-visual { height: 340px; }
+    .z-hero-visual { height: 390px; }
     .z-hero-note { font-size: 1.25rem; }
     .z-paper-stack { top: 195px; right: 0; width: 185px; }
     .z-paper-stack img { width: 105px; }
